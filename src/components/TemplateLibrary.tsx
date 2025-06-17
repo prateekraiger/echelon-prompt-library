@@ -1,10 +1,12 @@
 
 import React, { useState } from 'react';
 import TemplateCard from './TemplateCard';
-import { Search, List, Settings } from 'lucide-react';
+import { Search, Grid, List, Filter } from 'lucide-react';
 
 const TemplateLibrary = () => {
   const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchTerm, setSearchTerm] = useState('');
+  const [viewMode, setViewMode] = useState('grid');
   
   const categories = [
     'All',
@@ -75,29 +77,34 @@ const TemplateLibrary = () => {
     }
   ];
 
-  const filteredTemplates = selectedCategory === 'All' 
-    ? templates 
-    : templates.filter(template => template.category === selectedCategory);
+  const filteredTemplates = templates.filter(template => {
+    const matchesCategory = selectedCategory === 'All' || template.category === selectedCategory;
+    const matchesSearch = template.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         template.description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         template.tags.some(tag => tag.toLowerCase().includes(searchTerm.toLowerCase()));
+    return matchesCategory && matchesSearch;
+  });
 
   return (
-    <section className="bg-slate-900 py-16">
+    <section className="bg-slate-900 py-12 lg:py-16">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-white mb-4">Template Library</h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto">
+        <div className="text-center mb-8 lg:mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Template Library</h2>
+          <p className="text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto">
             Discover professionally crafted prompts designed for maximum effectiveness across all AI models and use cases.
           </p>
         </div>
 
         {/* Filters and Search */}
-        <div className="mb-8">
-          <div className="flex flex-col lg:flex-row gap-4 items-center justify-between mb-6">
-            <div className="flex flex-wrap gap-2">
+        <div className="mb-6 lg:mb-8">
+          {/* Category Filter - Mobile Scrollable */}
+          <div className="mb-4 lg:mb-6">
+            <div className="flex overflow-x-auto pb-2 lg:pb-0 lg:flex-wrap lg:justify-center gap-2">
               {categories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setSelectedCategory(category)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                  className={`px-3 py-2 lg:px-4 lg:py-2 rounded-lg text-sm font-medium transition-all whitespace-nowrap ${
                     selectedCategory === category
                       ? 'bg-blue-600 text-white'
                       : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
@@ -107,39 +114,91 @@ const TemplateLibrary = () => {
                 </button>
               ))}
             </div>
+          </div>
+          
+          {/* Search and View Controls */}
+          <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 items-stretch sm:items-center justify-between">
+            <div className="relative flex-1 max-w-md">
+              <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
+              <input
+                type="text"
+                placeholder="Search templates..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2 lg:py-3 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              />
+            </div>
             
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <Search className="w-4 h-4 absolute left-3 top-1/2 transform -translate-y-1/2 text-slate-400" />
-                <input
-                  type="text"
-                  placeholder="Search templates..."
-                  className="bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-64"
-                />
-              </div>
-              <button className="bg-slate-800 border border-slate-700 p-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <List className="w-4 h-4 text-slate-300" />
+            <div className="flex items-center gap-2">
+              <button 
+                onClick={() => setViewMode('grid')}
+                className={`p-2 lg:p-3 rounded-lg transition-colors ${
+                  viewMode === 'grid' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                }`}
+              >
+                <Grid className="w-4 h-4" />
               </button>
-              <button className="bg-slate-800 border border-slate-700 p-2 rounded-lg hover:bg-slate-700 transition-colors">
-                <Settings className="w-4 h-4 text-slate-300" />
+              <button 
+                onClick={() => setViewMode('list')}
+                className={`p-2 lg:p-3 rounded-lg transition-colors ${
+                  viewMode === 'list' ? 'bg-blue-600 text-white' : 'bg-slate-800 text-slate-300 hover:bg-slate-700'
+                }`}
+              >
+                <List className="w-4 h-4" />
+              </button>
+              <button className="bg-slate-800 border border-slate-700 p-2 lg:p-3 rounded-lg hover:bg-slate-700 transition-colors">
+                <Filter className="w-4 h-4 text-slate-300" />
               </button>
             </div>
           </div>
         </div>
 
-        {/* Template Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Results Count */}
+        <div className="mb-4 lg:mb-6">
+          <p className="text-slate-400 text-sm">
+            {filteredTemplates.length} template{filteredTemplates.length !== 1 ? 's' : ''} found
+          </p>
+        </div>
+
+        {/* Template Grid/List */}
+        <div className={`${
+          viewMode === 'grid' 
+            ? 'grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 lg:gap-6' 
+            : 'space-y-4'
+        }`}>
           {filteredTemplates.map((template, index) => (
             <TemplateCard key={index} {...template} />
           ))}
         </div>
 
         {/* Load More */}
-        <div className="text-center mt-12">
-          <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-3 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all">
-            Load More Templates
-          </button>
-        </div>
+        {filteredTemplates.length > 0 && (
+          <div className="text-center mt-8 lg:mt-12">
+            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
+              Load More Templates
+            </button>
+          </div>
+        )}
+
+        {/* No Results */}
+        {filteredTemplates.length === 0 && (
+          <div className="text-center py-12 lg:py-16">
+            <div className="text-slate-400 mb-4">
+              <Search className="w-12 h-12 mx-auto mb-4 opacity-50" />
+              <h3 className="text-lg font-semibold mb-2">No templates found</h3>
+              <p>Try adjusting your search or filter criteria</p>
+            </div>
+            <button 
+              onClick={() => {
+                setSearchTerm('');
+                setSelectedCategory('All');
+              }}
+              className="text-blue-400 hover:text-blue-300 font-medium"
+            >
+              Clear filters
+            </button>
+          </div>
+        )}
       </div>
     </section>
   );
