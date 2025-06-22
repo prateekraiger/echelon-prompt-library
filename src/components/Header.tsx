@@ -1,6 +1,11 @@
+import React, { useState } from "react";
+import { Search, Settings, Users, Menu, X } from "lucide-react";
+import { Link, NavLink } from "react-router-dom";
 
-import React, { useState } from 'react';
-import { Search, Settings, Users, Menu, X } from 'lucide-react';
+const navLinks = [
+  { to: "/library", text: "Library" },
+  { to: "/models", text: "Models" },
+];
 
 const Header = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -10,25 +15,36 @@ const Header = () => {
   };
 
   return (
-    <header className="bg-slate-900/95 backdrop-blur-sm border-b border-slate-800 sticky top-0 z-50">
+    <header className="bg-transparent backdrop-blur-sm border-b border-slate-800 sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
           <div className="flex items-center">
-            <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <div className="w-8 h-8 border border-blue-500/50 rounded-lg flex items-center justify-center">
               <span className="text-white font-bold text-sm">E</span>
             </div>
-            <span className="ml-2 text-xl font-bold text-white">EchelonPrompts</span>
+            <span className="ml-2 text-xl font-bold text-white">
+              EchelonPrompts
+            </span>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex space-x-6">
-            <a href="#library" className="text-slate-300 hover:text-white transition-colors">Library</a>
-            <a href="#templates" className="text-slate-300 hover:text-white transition-colors">Templates</a>
-            <a href="#analytics" className="text-slate-300 hover:text-white transition-colors">Analytics</a>
-            <a href="#docs" className="text-slate-300 hover:text-white transition-colors">Docs</a>
+            {navLinks.map((link) => (
+              <NavLink
+                key={link.to}
+                to={link.to}
+                className={({ isActive }) =>
+                  `transition-colors ${
+                    isActive ? "text-white" : "text-slate-300 hover:text-white"
+                  }`
+                }
+              >
+                {link.text}
+              </NavLink>
+            ))}
           </nav>
-          
+
           {/* Desktop Search and Actions */}
           <div className="hidden md:flex items-center space-x-4">
             <div className="relative">
@@ -36,7 +52,7 @@ const Header = () => {
               <input
                 type="text"
                 placeholder="Search templates..."
-                className="bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-48 lg:w-64"
+                className="bg-transparent border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent w-48 lg:w-64"
               />
             </div>
             <button className="text-slate-300 hover:text-white transition-colors p-2">
@@ -45,17 +61,21 @@ const Header = () => {
             <button className="text-slate-300 hover:text-white transition-colors p-2">
               <Users className="w-5 h-5" />
             </button>
-            <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all">
+            <button className="border border-purple-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-600/20 transition-all">
               Get Started
             </button>
           </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={toggleMobileMenu}
             className="md:hidden text-slate-300 hover:text-white transition-colors p-2"
           >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            {isMobileMenuOpen ? (
+              <X className="w-6 h-6" />
+            ) : (
+              <Menu className="w-6 h-6" />
+            )}
           </button>
         </div>
 
@@ -69,23 +89,27 @@ const Header = () => {
                 <input
                   type="text"
                   placeholder="Search templates..."
-                  className="w-full bg-slate-800 border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full bg-transparent border border-slate-700 rounded-lg pl-10 pr-4 py-2 text-sm text-white placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent"
                 />
               </div>
 
               {/* Mobile Navigation */}
-              <a href="#library" className="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
-                Library
-              </a>
-              <a href="#templates" className="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
-                Templates
-              </a>
-              <a href="#analytics" className="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
-                Analytics
-              </a>
-              <a href="#docs" className="block px-3 py-2 text-slate-300 hover:text-white hover:bg-slate-800 rounded-md transition-colors">
-                Docs
-              </a>
+              {navLinks.map((link) => (
+                <NavLink
+                  key={link.to}
+                  to={link.to}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className={({ isActive }) =>
+                    `block px-3 py-2 rounded-md transition-colors ${
+                      isActive
+                        ? "text-white bg-slate-800"
+                        : "text-slate-300 hover:text-white hover:bg-slate-800"
+                    }`
+                  }
+                >
+                  {link.text}
+                </NavLink>
+              ))}
 
               {/* Mobile Actions */}
               <div className="flex items-center justify-between pt-4 border-t border-slate-800 mt-4">
@@ -97,7 +121,7 @@ const Header = () => {
                     <Users className="w-5 h-5" />
                   </button>
                 </div>
-                <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all">
+                <button className="border border-purple-500 text-white px-4 py-2 rounded-lg font-medium hover:bg-purple-600/20 transition-all">
                   Get Started
                 </button>
               </div>

@@ -1,87 +1,102 @@
-
-import React from 'react';
-import { Database, Settings, Users, Book, Code, Search } from 'lucide-react';
+import React from "react";
+import { Database, Settings, Users, Book, Code, Search } from "lucide-react";
 
 const FeaturesSection = () => {
   const features = [
     {
       icon: Database,
       title: "Enterprise Analytics",
-      description: "Track performance metrics, A/B test prompts, and optimize outputs with comprehensive analytics dashboard.",
-      stats: "99.9% Uptime"
+      description:
+        "Track performance metrics, A/B test prompts, and optimize outputs with comprehensive analytics dashboard.",
+      stats: "99.9% Uptime",
     },
     {
       icon: Settings,
       title: "Dynamic Engineering",
-      description: "Variable injection, conditional logic, and context-aware adaptations for sophisticated prompt workflows.",
-      stats: "200+ Variables"
+      description:
+        "Variable injection, conditional logic, and context-aware adaptations for sophisticated prompt workflows.",
+      stats: "200+ Variables",
     },
     {
       icon: Users,
       title: "Team Collaboration",
-      description: "Role-based access control, shared template libraries, and collaborative prompt development tools.",
-      stats: "10K+ Teams"
+      description:
+        "Role-based access control, shared template libraries, and collaborative prompt development tools.",
+      stats: "10K+ Teams",
     },
     {
       icon: Book,
       title: "Template Versioning",
-      description: "Complete version control with rollback capabilities, change tracking, and deployment pipelines.",
-      stats: "50+ Versions"
+      description:
+        "Complete version control with rollback capabilities, change tracking, and deployment pipelines.",
+      stats: "50+ Versions",
     },
     {
       icon: Code,
       title: "API Integration",
-      description: "RESTful API with SDKs for seamless integration into your existing development workflow and CI/CD.",
-      stats: "1M+ API Calls"
+      description:
+        "RESTful API with SDKs for seamless integration into your existing development workflow and CI/CD.",
+      stats: "1M+ API Calls",
     },
     {
       icon: Search,
       title: "Smart Discovery",
-      description: "AI-powered template recommendations based on your use case, team patterns, and success metrics.",
-      stats: "90% Match Rate"
-    }
+      description:
+        "AI-powered template recommendations based on your use case, team patterns, and success metrics.",
+      stats: "90% Match Rate",
+    },
   ];
 
   return (
-    <section className="bg-slate-800 py-12 lg:py-20">
+    <section className="py-12 lg:py-20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12 lg:mb-16">
-          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">Built for Production</h2>
+        <div className="text-center mb-12">
+          <h2 className="text-3xl lg:text-4xl font-bold text-white mb-4">
+            Powerful Features for Superior Prompt Engineering
+          </h2>
           <p className="text-lg lg:text-xl text-slate-300 max-w-3xl mx-auto">
-            EchelonPrompts provides enterprise-grade infrastructure and tools to scale your AI operations with confidence.
+            EchelonPrompts provides a comprehensive suite of tools to streamline
+            your AI development workflow.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
           {features.map((feature, index) => (
-            <div key={index} className="bg-slate-900/50 backdrop-blur-sm border border-slate-700 rounded-xl p-6 lg:p-8 hover:border-slate-600 transition-all group">
-              <div className="flex items-center justify-between mb-4">
-                <div className="w-10 h-10 lg:w-12 lg:h-12 bg-gradient-to-r from-blue-500 to-purple-600 rounded-lg flex items-center justify-center group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-5 h-5 lg:w-6 lg:h-6 text-white" />
-                </div>
-                <span className="text-blue-400 text-xs lg:text-sm font-semibold">{feature.stats}</span>
+            <div
+              key={index}
+              className="backdrop-blur-sm border border-slate-700 rounded-xl p-6 lg:p-8 hover:border-slate-600 transition-all group"
+            >
+              <div className="flex items-center justify-center h-12 w-12 rounded-lg border border-blue-500/50 mb-6 group-hover:scale-110 transition-transform">
+                <feature.icon className="w-6 h-6 text-blue-400" />
               </div>
-              
-              <h3 className="text-white font-semibold text-lg lg:text-xl mb-3">{feature.title}</h3>
-              <p className="text-slate-400 leading-relaxed text-sm lg:text-base">{feature.description}</p>
+              <h3 className="text-xl font-semibold text-white mb-3">
+                {feature.title}
+              </h3>
+              <p className="text-slate-400">{feature.description}</p>
             </div>
           ))}
         </div>
 
-        {/* CTA Section */}
-        <div className="mt-16 lg:mt-20 text-center">
-          <div className="bg-gradient-to-r from-blue-600/20 to-purple-600/20 backdrop-blur-sm border border-blue-500/30 rounded-2xl p-8 lg:p-12">
-            <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">Ready to Transform Your AI Workflow?</h3>
-            <p className="text-slate-300 text-base lg:text-lg mb-6 lg:mb-8 max-w-2xl mx-auto">
-              Join thousands of teams already using EchelonPrompts to deliver consistent, high-quality AI outputs at scale.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 lg:gap-4 justify-center">
-              <button className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:from-blue-700 hover:to-purple-700 transition-all transform hover:scale-105">
-                Start Free Trial
-              </button>
-              <button className="border border-slate-600 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-slate-800 transition-all">
-                Schedule Demo
-              </button>
+        <div className="mt-16 lg:mt-24">
+          <div className="backdrop-blur-sm border border-blue-500/30 rounded-2xl p-8 lg:p-12">
+            <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
+              <div className="lg:w-1/2">
+                <h3 className="text-2xl lg:text-3xl font-bold text-white mb-4">
+                  Ready to elevate your AI?
+                </h3>
+                <p className="text-slate-300 text-lg">
+                  Join thousands of developers and businesses who trust
+                  EchelonPrompts to deliver exceptional AI performance.
+                </p>
+              </div>
+              <div className="flex gap-4">
+                <button className="border border-purple-500 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-purple-600/20 transition-all transform hover:scale-105">
+                  Start Building
+                </button>
+                <button className="border border-slate-700 text-slate-300 px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-slate-800 transition-all">
+                  Contact Sales
+                </button>
+              </div>
             </div>
           </div>
         </div>

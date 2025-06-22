@@ -1,20 +1,14 @@
-
-import React from 'react';
-import Header from '../components/Header';
-import HeroSection from '../components/HeroSection';
-import TemplateLibrary from '../components/TemplateLibrary';
-import FeaturesSection from '../components/FeaturesSection';
-import Footer from '../components/Footer';
+import React from "react";
+import HeroSection from "../components/HeroSection";
+import FeaturesSection from "../components/FeaturesSection";
+import Layout from "../layouts/Layout";
 
 const Index = () => {
   return (
-    <div className="min-h-screen bg-slate-900">
-      <Header />
+    <Layout>
       <HeroSection />
-      <TemplateLibrary />
       <FeaturesSection />
-      <Footer />
-    </div>
+    </Layout>
   );
 };
 
