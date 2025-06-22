@@ -1,5 +1,6 @@
 import React from "react";
 import { Award, BarChart2, Zap } from "lucide-react";
+import { Link } from "react-router-dom";
 
 const HeroSection = () => {
   return (
@@ -25,12 +26,18 @@ const HeroSection = () => {
             unparalleled control, analytics, and collaboration features.
           </p>
           <div className="flex justify-center items-center gap-4">
-            <button className="border border-purple-500 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-purple-600/20 transition-all transform hover:scale-105">
+            <Link
+              to="/library"
+              className="border border-purple-500 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-purple-600/20 transition-all transform hover:scale-105"
+            >
               Get Started
-            </button>
-            <button className="border border-slate-700 text-slate-300 px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-slate-800 transition-all">
-              Request a Demo
-            </button>
+            </Link>
+            <Link
+              to="/models"
+              className="border border-slate-700 text-slate-300 px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-slate-800 transition-all"
+            >
+              Explore Models
+            </Link>
           </div>
         </div>
 

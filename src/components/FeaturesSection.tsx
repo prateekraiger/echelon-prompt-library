@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { Database, Settings, Users, Book, Code, Search } from "lucide-react";
 
 const FeaturesSection = () => {
@@ -90,12 +91,18 @@ const FeaturesSection = () => {
                 </p>
               </div>
               <div className="flex gap-4">
-                <button className="border border-purple-500 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-purple-600/20 transition-all transform hover:scale-105">
+                <Link
+                  to="/library"
+                  className="border border-purple-500 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-purple-600/20 transition-all transform hover:scale-105"
+                >
                   Start Building
-                </button>
-                <button className="border border-slate-700 text-slate-300 px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-slate-800 transition-all">
+                </Link>
+                <a
+                  href="mailto:sales@echelon.com"
+                  className="border border-slate-700 text-slate-300 px-6 py-3 lg:px-8 lg:py-4 rounded-lg font-semibold text-base lg:text-lg hover:bg-slate-800 transition-all"
+                >
                   Contact Sales
-                </button>
+                </a>
               </div>
             </div>
           </div>
