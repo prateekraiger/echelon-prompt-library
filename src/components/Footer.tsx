@@ -4,7 +4,7 @@ import { Book, Code, Users, Settings } from "lucide-react";
 const Footer = () => {
   return (
     <footer className="bg-transparent border-t border-slate-800">
-      <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8">
+      <div className="w-full py-8 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Logo and About */}
           <div className="md:col-span-1">
