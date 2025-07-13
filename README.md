@@ -43,17 +43,6 @@ The ultimate AI prompt engineering suite for enterprise-grade results. Build, te
 
 ---
 
-## 🌐 Deployment
-
-- Deploy instantly via [Lovable](https://lovable.dev/projects/83cd0e35-41b9-4de9-9398-aee1c9ef7b06) (Share → Publish)
-- Or use your preferred static hosting (Vercel, Netlify, etc.)
-
-## 🔗 Custom Domain
-
-- Go to Project > Settings > Domains in Lovable
-- Click Connect Domain
-- [Read the guide](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide)
-
 ---
 
 ## 🤝 Contributing
